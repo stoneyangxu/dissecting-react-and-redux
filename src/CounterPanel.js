@@ -8,6 +8,10 @@ class CounterPanel extends Component {
         <ClickCounter caption="First" initValue={1}/>
         <ClickCounter caption="Second" initValue={10} />
         <ClickCounter caption="Third" initValue={100} />
+
+        <div>
+          <button onClick={() => this.forceUpdate()}>Click</button>
+        </div>
       </div>
     );
   }
