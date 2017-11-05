@@ -7,34 +7,21 @@ class ClickCounter extends Component {
   constructor(props) {
     super(props);
 
-    console.log(`enter constructor ${this.props.caption}`);
-
     this.state = { count: this.props.initValue || 0 };
     this.onClickButton = this.onClickButton.bind(this);
   }
 
   onClickButton() {
-    this.setState({ count: this.state.count + 1 })
-  }
 
-  componentWillMount() {
-    console.log(`enter componentWillMount ${this.props.caption}`);
-  }
+    const previousValue = this.state.count;
+    const newValue = previousValue + 1;
 
-  componentDidMount() {
-    console.log(`enter componentDidMount ${this.props.caption}`);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log(`enter componentWillReceiveProps ${this.props.caption}`);
+    this.setState({ count: newValue })
+    this.props.onUpdate(previousValue, newValue)
   }
 
   render() {
-
-    console.log(`enter render ${this.props.caption}`);
-
     const { caption } = this.props;
-
     return (
       <div>
         <button onClick={this.onClickButton}>Click Me</button>
