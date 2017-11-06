@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import CounterPanel from './CounterPanel';
+import CounterPanel from './views/CounterPanel';
 
 class App extends Component {
   render() {
