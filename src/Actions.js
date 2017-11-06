@@ -2,18 +2,17 @@ import * as ActionTypes from './ActionTypes';
 import AppDispatcher from './AppDispatcher';
 
 export const increase = (caption) => {
-  console.log('dispatch increase')
-  AppDispatcher.dispatch({
+  return {
     type: ActionTypes.INCREASE,
-    caption: caption
-  })
+    caption
+  }
 }
 
 export const decrease = (caption) => {
-  AppDispatcher.dispatch({
+  return {
     type: ActionTypes.DECREASE,
-    caption: caption
-  })
+    caption
+  }
 }
 
 export default {increase, decrease}

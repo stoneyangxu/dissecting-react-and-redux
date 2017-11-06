@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Actions from '../Actions'
-import CounterStore from '../stores/CounterStore'
+import store from '../Store'
 
 
 class ClickCounter extends Component {
@@ -9,34 +9,37 @@ class ClickCounter extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      count: CounterStore.getCounterValues()[props.caption]
-    }
+    this.state = this.getOwnState()
 
     this.onChange = this.onChange.bind(this);
     this.increase = this.increase.bind(this);
     this.decrease = this.decrease.bind(this);
   }
 
+  getOwnState() {
+    return {
+      value: store.getState()[this.props.caption]
+    }
+  }
+
   increase() {
-    Actions.increase(this.props.caption)
+    store.dispatch(Actions.increase(this.props.caption))
   }
 
   decrease() {
-    Actions.decrease(this.props.caption)
+    store.dispatch(Actions.decrease(this.props.caption))
   }
 
   onChange() {
-    const newCount = CounterStore.getCounterValues()[this.props.caption];
-    this.setState({count: newCount});
+    this.setState(this.getOwnState());
   }
 
   componentDidMount() {
-    CounterStore.addChangeListener(this.onChange)
+    store.subscribe(this.onChange)
   }
 
   componentWillUnmount() {
-    CounterStore.removeChangeListener(this.onChange)
+    store.unsubscribe(this.onChange)
   }
 
   render() {
@@ -45,9 +48,7 @@ class ClickCounter extends Component {
       <div>
         <button onClick={this.increase}>+</button>
         <button onClick={this.decrease}>-</button>
-        <div>
-          {caption} Count: {this.state.count}
-        </div>
+        <span>{caption} Count: {this.state.value}</span>
       </div>
     );
   }

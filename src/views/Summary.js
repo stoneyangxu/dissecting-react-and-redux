@@ -1,37 +1,45 @@
 import React, { Component } from 'react';
-import SummaryStore from '../stores/SummaryStore'
+import store from '../Store'
 
 class Summary extends Component {
 
   constructor(props) {
     super(props)
 
-    this.state = {
-      summary: SummaryStore.getSummary()
-    }
+    this.state = this.getOwnState()
 
     this.onChange = this.onChange.bind(this)
   }
 
+  getOwnState() {
+    const state = store.getState()
+    let sum = 0;
+
+    for (let key in state) {
+      if (state.hasOwnProperty(key)) {
+        sum += state[key]
+      }
+    }
+
+    return {sum}
+  }
+
   onChange() {
-    const summary = SummaryStore.getSummary()
-    this.setState({
-      summary
-    })
+    this.setState(this.getOwnState())
   }
 
   componentDidMount() {
-    SummaryStore.addChangeListener(this.onChange)
+    store.subscribe(this.onChange)
   }
 
   componentWillUnmount() {
-    SummaryStore.removeChangeListener(this.onChange)
+    store.unsubscribe(this.onChange)
   }
 
   render() {
     return (
       <div>
-        Summary is : {this.state.summary}
+        Summary is : {this.state.sum}
       </div>
     );
   }
