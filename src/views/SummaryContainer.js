@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import store from '../Store'
+import PropTypes from 'prop-types';
 import Summary from './Summary'
 
 class SummaryContainer extends Component {
 
-  constructor(props) {
-    super(props)
+  constructor(props, context) {
+    super(props, context)
 
     this.state = this.getOwnState()
 
@@ -13,7 +13,7 @@ class SummaryContainer extends Component {
   }
 
   getOwnState() {
-    const state = store.getState()
+    const state = this.context.store.getState()
     let sum = 0;
 
     for (let key in state) {
@@ -30,11 +30,11 @@ class SummaryContainer extends Component {
   }
 
   componentDidMount() {
-    store.subscribe(this.onChange)
+    this.context.store.subscribe(this.onChange)
   }
 
   componentWillUnmount() {
-    store.unsubscribe(this.onChange)
+    this.context.store.unsubscribe(this.onChange)
   }
 
   render() {
@@ -42,6 +42,10 @@ class SummaryContainer extends Component {
       <Summary summary={this.state.sum} />
     );
   }
+}
+
+SummaryContainer.contextTypes = {
+  store: PropTypes.object
 }
 
 export default SummaryContainer;

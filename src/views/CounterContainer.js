@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Actions from '../Actions'
-import store from '../Store'
 import Counter from './Counter'
 
 
 class CounterContainer extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.state = this.getOwnState()
 
@@ -19,16 +18,16 @@ class CounterContainer extends Component {
 
   getOwnState() {
     return {
-      value: store.getState()[this.props.caption]
+      value: this.context.store.getState()[this.props.caption]
     }
   }
 
   increase() {
-    store.dispatch(Actions.increase(this.props.caption))
+    this.context.store.dispatch(Actions.increase(this.props.caption))
   }
 
   decrease() {
-    store.dispatch(Actions.decrease(this.props.caption))
+    this.context.store.dispatch(Actions.decrease(this.props.caption))
   }
 
   onChange() {
@@ -36,11 +35,11 @@ class CounterContainer extends Component {
   }
 
   componentDidMount() {
-    store.subscribe(this.onChange)
+    this.context.store.subscribe(this.onChange)
   }
 
   componentWillUnmount() {
-    store.unsubscribe(this.onChange)
+    this.context.store.unsubscribe(this.onChange)
   }
 
   render() {
@@ -54,10 +53,14 @@ class CounterContainer extends Component {
   }
 }
 
+CounterContainer.contextTypes = {
+  store: PropTypes.object
+}
+
 CounterContainer.propTypes = {
   caption: PropTypes.string.isRequired,
   initValue: PropTypes.number,
-  onUpdate: PropTypes.func
+  onUpdate: PropTypes.func,
 }
 
 CounterContainer.defaultProps = {
