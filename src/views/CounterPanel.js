@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ClickCounter from './ClickCounter';
-import Summary from './Summary'
+import CounterContainer from './CounterContainer';
+import SummaryContainer from './SummaryContainer'
 
 class CounterPanel extends Component {
 
@@ -11,11 +11,11 @@ class CounterPanel extends Component {
   render() {
     return (
       <div>
-        <ClickCounter caption="First" />
-        <ClickCounter caption="Second" />
-        <ClickCounter caption="Third" />
+        <CounterContainer caption="First" />
+        <CounterContainer caption="Second" />
+        <CounterContainer caption="Third" />
 
-        <Summary />
+        <SummaryContainer />
       </div>
     );
   }

@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Actions from '../Actions'
 import store from '../Store'
+import Counter from './Counter'
 
 
-class ClickCounter extends Component {
+class CounterContainer extends Component {
 
   constructor(props) {
     super(props);
@@ -45,24 +46,23 @@ class ClickCounter extends Component {
   render() {
     const { caption } = this.props;
     return (
-      <div>
-        <button onClick={this.increase}>+</button>
-        <button onClick={this.decrease}>-</button>
-        <span>{caption} Count: {this.state.value}</span>
-      </div>
+      <Counter caption={caption}
+        onIncrease={this.increase}
+        onDecrease={this.decrease}
+        value={this.state.value} />
     );
   }
 }
 
-ClickCounter.propTypes = {
+CounterContainer.propTypes = {
   caption: PropTypes.string.isRequired,
   initValue: PropTypes.number,
   onUpdate: PropTypes.func
 }
 
-ClickCounter.defaultProps = {
+CounterContainer.defaultProps = {
   initValue: 0,
   onUpdate: f => f // 默认是一个什么都不做的函数
 }
 
-export default ClickCounter;
+export default CounterContainer;
