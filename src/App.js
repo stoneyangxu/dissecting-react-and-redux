@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 
-import CounterPanel from './views/CounterPanel';
+import { Todos } from './todos';
+import { Filter } from './filter';
 
 class App extends Component {
   render() {
     return (
-      <CounterPanel />
+      <div>
+        <Todos />
+        <Filter />
+      </div>
     );
   }
 }
