@@ -7,31 +7,39 @@ class AddTodo extends Component {
   constructor(props) {
     super(props)
 
-    this.refInput = this.refInput.bind(this)
+    this.state = {
+      value: ''
+    }
+
+    this.onInputChange = this.onInputChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
   }
 
-  refInput(node) {
-    this.input = node
+  onInputChange(e) {
+    this.setState({
+      value: e.target.value
+    })
   }
 
   onSubmit(e) {
     e.preventDefault()
 
-    const input = this.input
-    if (!input.value.trim()) {
+    const value = this.state.value
+    if (!value.trim()) {
       return
     }
 
-    this.props.onAdd(input.value)
-    input.value = ''
+    this.props.onAdd(value)
+    this.setState({
+      value: ''
+    })
   }
 
   render() {
     return (
       <div className="row">
         <form className="form-inline" onSubmit={this.onSubmit}>
-          <input className="col-8 form-control" ref={this.refInput} />
+          <input className="col-8 form-control" value={this.state.value} onChange={this.onInputChange} />
           <button className="col-3 btn btn-primary" type="submit">Add</button>
         </form>
       </div>
