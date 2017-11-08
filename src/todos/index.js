@@ -1,4 +1,4 @@
-import Todos from './views/Todos'
+import Todos from './views/todos'
 import * as actions from './actions'
 import reducer from './reducer'
 

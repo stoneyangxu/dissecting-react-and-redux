@@ -1,7 +1,13 @@
 import React from 'react';
 
-function Todos() {
-  return <div>Todos</div>
-}
+import TodoList from './todoList'
+import AddTodo from './addTodo'
 
-export default Todos;
+export default () => {
+  return (
+    <div>
+      <TodoList />
+      <AddTodo />
+    </div>
+  )
+}
