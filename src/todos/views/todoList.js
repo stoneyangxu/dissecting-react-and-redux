@@ -4,6 +4,8 @@ import TodoItem from './todoItem'
 import { bindActionCreators } from 'redux'
 import { filterTypes as FilterTypes } from '../../filter'
 
+import {filterByCompleteState} from '../selector'
+
 const TodoList = ({ todos, onToggle, onRemove }) => {
   return (
     <ul className="row list-group">
@@ -21,22 +23,9 @@ const TodoList = ({ todos, onToggle, onRemove }) => {
   )
 }
 
-function filterByCompleteState(todos, filter) {
-  switch (filter) {
-    case FilterTypes.ALL:
-      return todos;
-    case FilterTypes.COMPLETED:
-      return todos.filter(todo => todo.completed)
-    case FilterTypes.UNCOMPLETED:
-      return todos.filter(todo => !todo.completed)
-    default:
-      return todos;
-  }
-}
-
 function mapStateToProps(state = [], ownProps) {
   return {
-    todos: filterByCompleteState(state.todos, state.filter)
+    todos: filterByCompleteState(state)
   }
 }
 
