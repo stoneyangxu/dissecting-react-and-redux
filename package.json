@@ -22,5 +22,6 @@
   },
   "devDependencies": {
     "redux-immutable-state-invariant": "^2.1.0"
-  }
+  },
+  "proxy": "http://www.weather.com.cn/"
 }
