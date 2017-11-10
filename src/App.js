@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Todos } from './todos';
 import { Filter } from './filter';
 import CountDown from './CountDown'
-import Weather from './Weather'
+import { Weather } from './weather'
 
 class App extends Component {
   render() {
