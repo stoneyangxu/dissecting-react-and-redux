@@ -5,7 +5,7 @@ import { toggleTodo, removeTodo } from '../actions'
 const TodoItem = ({ text, completed, onToggle, onRemove }) => (
   <li className="list-group-item">
     <input type="checkbox" checked={completed ? 'checked' : ''} onClick={onToggle} />
-    <span>{text}</span>
+    <span className="text">{text}</span>
     <button className="btn btn-sm btn-light" onClick={onRemove}>x</button>
   </li>
 );
